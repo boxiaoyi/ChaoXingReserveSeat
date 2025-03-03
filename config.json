@@ -2,7 +2,7 @@
     "reserve": [
         {"username": "xxxxxxxxxx",
         "password": "xxxxxxxxx",
-        "time": ["21:00","22:00"],
+        "time": ["19:00","20:00","20:00","21:00"],
         "roomid":"7957",
         "seatid":["166"],
         "daysofweek": ["Monday" , "Tuesday", "Wednesday", "Thursday", "Friday"]
