@@ -9,8 +9,8 @@
             "daysofweek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
         },
         {
-            "username": "",  // 用户名可以相同或不同，根据实际情况
-            "password": "",  // 密码同理
+            "username": "",
+            "password": "",
             "time": ["20:00", "21:00"],
             "roomid": "7957",
             "seatid": ["166"],
