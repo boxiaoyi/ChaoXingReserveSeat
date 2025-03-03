@@ -5,14 +5,14 @@
         "time": [["09:00","11:00"],["11:00","14:00"],["14:00","18:00"],["18:00","22:00"]],
         "roomid":"7957",
         "seatid":["170"],
-        "daysofweek": ["Tuesday","Thursday","Friday","Saturday"]
+        "daysofweek": ["Wednesday","Thursday","Friday","Saturday"]
     },
         {"username": "xxxxxxxxxx",
         "password": "xxxxxxxxx",
         "time": [["09:00","11:30"],["18:00","22:00"]],
         "roomid":"7957",
         "seatid":["170"],
-        "daysofweek": ["Wednesday"]
+        "daysofweek": ["Tuesday"]
         }
     ]
 }
