@@ -12,12 +12,12 @@ get_current_time = lambda action: time.strftime("%H:%M:%S", time.localtime(time.
 get_current_dayofweek = lambda action: time.strftime("%A", time.localtime(time.time() + 8*3600)) if action else time.strftime("%A", time.localtime(time.time()))
 
 
-SLEEPTIME = 0.2 # 每次抢座的间隔
-ENDTIME = "09:55:00" # 根据学校的预约座位时间+1min即可
+SLEEPTIME = 0.1 # 每次抢座的间隔
+ENDTIME = "18:01:00" # 根据学校的预约座位时间+1min即可
 
 ENABLE_SLIDER = False # 是否有滑块验证
-MAX_ATTEMPT = 5 # 最大尝试次数
-RESERVE_NEXT_DAY = True # 预约明天而不是今天的
+MAX_ATTEMPT = 1000 #  最大尝试次数
+RESERVE_NEXT_DAY = False # 预约明天而不是今天的
 
                 
 
@@ -29,20 +29,25 @@ def login_and_reserve(users, usernames, passwords, action, success_list=None):
         success_list = [False] * len(users)
     current_dayofweek = get_current_dayofweek(action)
     for index, user in enumerate(users):
-        username, password, times, roomid, seatid, daysofweek = user.values()
+        username, password, times_list, roomid, seatid, daysofweek = user.values()
         if action:
             username, password = usernames.split(',')[index], passwords.split(',')[index]
-        if(current_dayofweek not in daysofweek):
+        if current_dayofweek not in daysofweek:
             logging.info("Today not set to reserve")
             continue
         if not success_list[index]: 
-            logging.info(f"----------- {username} -- {times} -- {seatid} try -----------")
+            logging.info(f"----------- {username} -- {times_list} -- {seatid} try -----------")
             s = reserve(sleep_time=SLEEPTIME, max_attempt=MAX_ATTEMPT, enable_slider=ENABLE_SLIDER, reserve_next_day=RESERVE_NEXT_DAY)
             s.get_login_status()
             s.login(username, password)
             s.requests.headers.update({'Host': 'office.chaoxing.com'})
-            suc = s.submit(times, roomid, seatid, action)
-            success_list[index] = suc
+            all_suc = True
+            for time_slot in times_list:
+                suc = s.submit([time_slot], roomid, seatid, action)
+                if not suc:
+                    all_suc = False
+                    break
+            success_list[index] = all_suc
     return success_list
 
 
