@@ -26,7 +26,7 @@ jobs:
           pip install cryptography requests opencv-python
 
       - name: Wait for specific seconds
-        run: sleep 30 # 这里设置等待秒数，例如等待30秒
+        run: sleep 40 # 这里设置等待秒数，例如等待30秒
 
 
       - name: run script
