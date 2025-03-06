@@ -6,7 +6,7 @@ name: auto_Reserve
 # or API.
 on:
   schedule:
-    - cron: "39 22 * * 1,2,3,4,5" # 周二到周六每天早上6:39启动（防止github action过于高负载）
+    - cron: "37 22 * * 1,2,3,4,5" # 周二到周六每天早上6:37启动（防止github action过于高负载）
   workflow_dispatch:
   
 jobs:
@@ -24,6 +24,9 @@ jobs:
           python -m pip install --upgrade pip
           sudo apt-get install build-essential libssl-dev libffi-dev  python3-dev -y
           pip install cryptography requests opencv-python
+
+      - name: Wait for specific seconds
+        run: sleep 1000 # 这里设置等待秒数，例如等待1000秒
 
       - name: run script
         env:
